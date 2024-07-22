@@ -15,16 +15,29 @@ dp = Dispatcher()
 async def cmd_start(message: types.Message):
     await message.answer("Start BigDickBot!")
 
+# Output id for any msg
+#@dp.message()
+#async def any_message(message):
+#    await message.reply(
+#        f"Hello, {message.from_user.id}"
+#    )
 
-@dp.message()
-async def any_message(message):
-    await message.reply(
-        f"Hello, {message.from_user.id}"
+
+@dp.message(Command("id"))
+async def print_id(message):
+    await message.answer(
+        f"Id user: {message.from_user.id}"
+    )
+
+
+@dp.message(Command("chatid"))
+async def print_chatid(message):
+    await message.answer(
+        f"Chat user: {message.chat.id}"
     )
 
 
 async def main():
-    dp.message.register(any_message)
     await dp.start_polling(bot)
 
 
